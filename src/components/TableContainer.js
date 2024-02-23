@@ -10,7 +10,7 @@ import {
   TableRow,
 } from '@mui/material';
 import styled from 'styled-components';
-import { Tooltip } from 'react-tooltip';
+// import { Tooltip } from 'react-tooltip';
 // import { getTableColumn } from '../utils/Utils.js';
 
 const TableWrapper = styled.div`
