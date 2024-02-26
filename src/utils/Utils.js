@@ -1,38 +1,175 @@
 import { IconButton } from '@mui/material';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import KeyboardContentCopy from '@mui/icons-material/ContentCopy';
+import {  Button } from '@mui/material';
+import Stack from '@mui/material/Stack';
 
 const localise = {
-  time: { title: 'Time', maxChar: 20 },
-  playerId: { title: 'PID', maxChar: 10 },
-  franchise: { title: 'Franchise', maxChar: 15 },
-  type: { title: 'Type', maxChar: 15 },
-  currency: { title: 'Currency', maxChar: 7 },
-  amount: { title: 'Amount', maxChar: 7 },
-  fee: { title: 'Fee', maxChar: 7 },
-  provider: { title: 'Provider', maxChar: 15 },
-  method: { title: 'Method', maxChar: 15 },
-  status: { title: 'TRX Status', maxChar: 20 },
-  bankInfo: { title: 'Bank Info', maxChar: 55 },
-  accHistRef: { title: 'TRX ref Internal', maxChar: 35 },
-  externalTrxRef: { title: 'TRX ref External', maxChar: 20 },
-  declineReason: { title: 'Decline Reason', maxChar: 60 },
-  errorCode: { title: 'Error Code', maxChar: 30 },
-  depositFlowType: { title: 'Flow/Deposit Type', maxChar: 16 },
-  playerEmail: { title: 'Email', maxChar: 25 },
-  '3ds': { title: '3DS (cards)', maxChar: 15 },
-  device: { title: 'Device/Browser', maxChar: 45 },
+  time: { title: 'Date & Time (Last Updated)', maxChar: 20 },
+  chainName: { title: 'Provider Chain Name', maxChar: 60 },
+  depositProvider: { title: '# Of Enabled Deposit Providers', maxChar: 10 },
+  withdrawlProvider: { title: '# Of Enabled Withdraw', maxChar: 7 },
+  bins: { title: '# Of BINs', maxChar: 7 },
+  franchise: { title: '# Of Franchise', maxChar: 7 }
 };
 
-export const getTableColumn = (items) => {
+export const strTruncate = (str, maxLen) =>
+str?.length > maxLen ? str?.substring(0, maxLen) + '...' : str?.toString();
+
+export const franchisenames = [
+  'ComeOn - Sweden',
+  'ComeOn - Global',
+  'ComeOn - Norway',
+  'ComeOn - Finland',
+];
+
+const items = {
+  time: "",
+  chainName: "",
+  depositProvider: "",
+  withdrawlProvider: "",
+  bins: "",
+  franchise: "",
+  action:""
+}
+
+export const itemsData =[
+  {
+    "id" : 1,
+    "time": "2023-06-20 14:00:01",
+    "chainName": "492556 PYLON - FTD -CO- SM",
+    "depositProvider": 1,
+    "withdrawlProvider": 0,
+    "bins":6,
+    "franchise":2
+  },
+  {
+    "id": 2,
+    "time": "2023-06-20 14:00:01",
+    "chainName": "492556 PYLON - FTD -CO- SM",
+    "depositProvider": 1,
+    "withdrawlProvider": 0,
+    "bins":6,
+    "franchise":2
+  },
+  {
+    "id": 3,
+    "time": "2023-06-20 14:00:01",
+    "chainName": "492556 PYLON - FTD -CO- SM",
+    "depositProvider": 1,
+    "withdrawlProvider": 0,
+    "bins":6,
+    "franchise":2
+  },
+  {
+    "id": 4,
+    "time": "2023-06-20 14:00:01",
+    "chainName": "492556 PYLON - FTD -CO- SM",
+    "depositProvider": 1,
+    "withdrawlProvider": 0,
+    "bins":6,
+    "franchise":2
+  },
+  {
+    "id": 5,
+    "time": "2023-06-20 14:00:01",
+    "chainName": "492556 PYLON - FTD -CO- SM",
+    "depositProvider": 1,
+    "withdrawlProvider": 0,
+    "bins":6,
+    "franchise":2
+  },
+  {
+    "id": 6,
+    "time": "2023-06-20 14:00:01",
+    "chainName": "492556 PYLON - FTD -CO- SM",
+    "depositProvider": 1,
+    "withdrawlProvider": 0,
+    "bins":6,
+    "franchise":2
+  },
+  {
+    "id": 7,
+    "time": "2023-06-20 14:00:01",
+    "chainName": "492556 PYLON - FTD -CO- SM",
+    "depositProvider": 1,
+    "withdrawlProvider": 0,
+    "bins":6,
+    "franchise":2
+  },
+  {
+    "id": 8,
+    "time": "2023-06-20 14:00:01",
+    "chainName": "492556 PYLON - FTD -CO- SM",
+    "depositProvider": 1,
+    "withdrawlProvider": 0,
+    "bins":6,
+    "franchise":2
+  },
+  {
+    "id": 9,
+    "time": "2023-06-20 14:00:01",
+    "chainName": "492556 PYLON - FTD -CO- SM",
+    "depositProvider": 1,
+    "withdrawlProvider": 0,
+    "bins":6,
+    "franchise":2
+  },
+  {
+    "id": 10,
+    "time": "2023-06-20 14:00:01",
+    "chainName": "492556 PYLON - FTD -CO- SM",
+    "depositProvider": 1,
+    "withdrawlProvider": 0,
+    "bins":6,
+    "franchise":2
+  },
+];
+
+export const getTableColumn = () => {
+
   const expandIcon = {
-    key: 'expand',
-    render: (selected, cb) => (
+    key : 'expand',
+    render: (cb) => (
       <>
         <IconButton onClick={cb}>
-          {selected ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+          <KeyboardContentCopy/>
         </IconButton>
       </>
+    ),
+  };
+
+  const expandButton = {
+    key : 'action',
+    render: (cb) => (
+      <Stack spacing={3} direction="row">
+          <Button
+            variant="outlined"
+            type="submit"
+            color="secondary"
+            style={{
+              margin: '0  0 15px 0',
+              background: '#9ecb2c',
+              borderColor: '#9ecb2c',
+              color: '#fff',
+            }}
+            onClick={cb}
+          >
+            VIEW
+          </Button>
+          <Button
+              variant="outlined"
+              type="submit"
+              color="secondary"
+              style={{
+                margin: '0 10px 15px 0',
+                borderColor: '#9ecb2c',
+                color: '#9ecb2c',
+              }}
+              onClick={cb}
+            >
+              REPORT
+          </Button>
+      </Stack>
     ),
   };
 
@@ -45,6 +182,8 @@ export const getTableColumn = (items) => {
       maxChar: localise[item]?.maxChar,
     })
   );
+
+  columns.push(expandButton);
 
   return columns;
 };

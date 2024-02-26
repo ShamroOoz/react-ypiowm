@@ -12,6 +12,7 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+import {franchisenames} from "../utils/Utils"
 
 const MenuProps = {
   PaperProps: {
@@ -22,18 +23,7 @@ const MenuProps = {
   },
 };
 
-const names = [
-  'Oliver Hansen',
-  'Van Henry',
-  'April Tucker',
-  'Ralph Hubbard',
-  'Omar Alexander',
-  'Carlos Abbott',
-  'Miriam Wagner',
-  'Bradley Wilkerson',
-  'Virginia Andrews',
-  'Kelly Snyder',
-];
+
 
 export default function TransactionSearch() {
   const [personName, setPersonName] = React.useState([]);
@@ -78,7 +68,7 @@ export default function TransactionSearch() {
                 renderValue={(selected) => selected.join(', ')}
                 MenuProps={MenuProps}
               >
-                {names.map((name) => (
+                {franchisenames.map((name) => (
                   <MenuItem key={name} value={name}>
                     <Checkbox checked={personName.indexOf(name) > -1} />
                     <ListItemText primary={name} />
@@ -106,7 +96,7 @@ export default function TransactionSearch() {
                 />
               </Stack>
             ))}
-            {personName?.length && (
+            {!!personName?.length && (
               <Button
                 type="button"
                 variant="text"
